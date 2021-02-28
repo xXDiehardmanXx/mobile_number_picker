@@ -7,9 +7,9 @@ Usage
 Call Function to inflate the mobile picker dialog
 ```dart
     mobileNumber.mobileNumber();
+```dart
 
 Listen to stream to listen to events added to stream
 ```dart
- mobileNumber.getMobileNumberStream.listen((event) {
-
-    });
+ mobileNumber.getMobileNumberStream.listen((event) {});
+ ``dart
