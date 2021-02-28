@@ -30,10 +30,10 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: const Text('Plugin example app'),
+          title: const Text('Mobile Number Plugin'),
         ),
         body: Center(
-          child: Text('Running on: ${mobileNumberObject.phoneNumber}\n'),
+          child: Text('Mobile Number: ${mobileNumberObject.phoneNumber}\n'),
         ),
       ),
     );
