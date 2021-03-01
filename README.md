@@ -13,3 +13,7 @@ Listen to stream to listen to events added to stream
 ```dart
 mobileNumber.getMobileNumberStream.listen((event) {});
 ```
+
+
+#Result
+![Image](http://url/to/img.png)
