@@ -5,7 +5,11 @@ Note: It works for Android only because getting mobile number is not supported i
 Usage
 
 Call Function to inflate the mobile picker dialog
+```dart
 mobileNumber.mobileNumber();
+```
 
 Listen to stream to listen to events added to stream
+```dart
 mobileNumber.getMobileNumberStream.listen((event) {});
+```
