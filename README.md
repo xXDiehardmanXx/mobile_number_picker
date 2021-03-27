@@ -17,5 +17,4 @@ Listen to stream to listen to events added to stream
 mobileNumber.getMobileNumberStream.listen((event) {});
 ```
 
-##Result
 ![Image](https://github.com/Aashishm178/mobile_number_picker/blob/master/image/image.png)
