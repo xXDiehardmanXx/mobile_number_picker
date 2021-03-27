@@ -1,6 +1,6 @@
 name: mobile_number_picker
 description: A Flutter Plugin fo inflate mobile number picker for Android only.
-version: 0.0.1+2
+version: 0.0.1+3
 homepage: https://github.com/Aashishm178/mobile_number_picker
 
 environment:
