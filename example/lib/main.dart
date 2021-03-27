@@ -17,7 +17,8 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    mobileNumber.mobileNumber();
+    WidgetsBinding.instance
+        .addPostFrameCallback((timeStamp) => mobileNumber.mobileNumber());
     mobileNumber.getMobileNumberStream.listen((event) {
       setState(() {
         mobileNumberObject = event;
@@ -33,7 +34,8 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Mobile Number Plugin'),
         ),
         body: Center(
-          child: Text('Mobile Number: ${mobileNumberObject.phoneNumber}\n'),
+          child: Text(
+              'Country Code: ${mobileNumberObject?.countryCode} Mobile Number: ${mobileNumberObject?.phoneNumber}\n'),
         ),
       ),
     );
