@@ -15,14 +15,22 @@ class _MyAppState extends State<MyApp> {
   MobileNumber mobileNumberObject = MobileNumber();
 
   @override
+  void dispose() {
+    mobileNumber.dispose();
+    super.dispose();
+  }
+
+  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance
         .addPostFrameCallback((timeStamp) => mobileNumber.mobileNumber());
-    mobileNumber.getMobileNumberStream.listen((event) {
-      setState(() {
-        mobileNumberObject = event;
-      });
+    mobileNumber.getMobileNumberStream.listen((MobileNumber event) {
+      if (event.states == PhoneNumberStates.PhoneNumberSelected) {
+        setState(() {
+          mobileNumberObject = event;
+        });
+      }
     });
   }
 

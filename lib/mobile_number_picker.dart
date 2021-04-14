@@ -6,12 +6,12 @@ final String defaultCountryCode = '+91';
 
 class MobileNumberPicker {
   static const MethodChannel _channel = const MethodChannel('mobile_number');
-  static StreamController<MobileNumber> _streamController =
+  StreamController<MobileNumber> _streamController =
       StreamController<MobileNumber>.broadcast();
 
-  Stream get getMobileNumberStream => _streamController.stream;
+  Stream<MobileNumber> get getMobileNumberStream => _streamController.stream;
 
-  static void dispose() {
+  void dispose() {
     _streamController.close();
   }
 
@@ -20,7 +20,7 @@ class MobileNumberPicker {
     try {
       final String number = await _channel.invokeMethod('getMobileNumber');
       if (number != null) {
-        Map<String, dynamic> data = phoneNumberReducer(number);
+        Map<String, dynamic> data = _phoneNumberReducer(number);
         _streamController.sink.add(MobileNumber(
           completeNumber: number,
           phoneNumber: data['number'] ?? defaultNumber,
@@ -41,7 +41,7 @@ class MobileNumberPicker {
   }
 
   //Function to extract country code and number seperately
-  Map phoneNumberReducer(String number) {
+  Map _phoneNumberReducer(String number) {
     String addRemoved = number.replaceAll('+', '');
     Map<String, dynamic> reducedMap = Map<String, dynamic>();
     for (int i = 3; i >= 1; i--) {
