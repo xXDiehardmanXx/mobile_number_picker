@@ -43,9 +43,6 @@ Members of mobilenumber class -
 
 - NoneOfTheAbove - when user selects None Of The Above option or dismisses the picker.
 
-::: warning
-PhoneNumber is only available if the enum state = PhoneNumberSelected , so first check the state of the event pushed in stream.
-:::
 
 ## Screenshot
 
