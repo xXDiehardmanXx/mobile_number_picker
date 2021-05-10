@@ -6,29 +6,32 @@ final String defaultCountryCode = '+91';
 
 class MobileNumberPicker {
   static const MethodChannel _channel = const MethodChannel('mobile_number');
-  StreamController<MobileNumber> _streamController =
-      StreamController<MobileNumber>.broadcast();
 
-  Stream<MobileNumber> get getMobileNumberStream => _streamController.stream;
+  ///Listen to events using stream
+  StreamController<MobileNumber?>? _streamController =
+      StreamController<MobileNumber?>.broadcast();
+
+  Stream<MobileNumber?> get getMobileNumberStream => _streamController!.stream;
 
   void dispose() {
-    _streamController.close();
+    _streamController?.close();
   }
 
-  //Call this function to initiate method channel and then after listen to the provided streams
+  ///Call this function to initiate method channel
   Future mobileNumber() async {
     try {
-      final String number = await _channel.invokeMethod('getMobileNumber');
+      final String? number = await _channel.invokeMethod('getMobileNumber');
       if (number != null) {
-        Map<String, dynamic> data = _phoneNumberReducer(number);
-        _streamController.sink.add(MobileNumber(
+        Map<String, dynamic> data =
+            _phoneNumberReducer(number) as Map<String, dynamic>;
+        _streamController!.sink.add(MobileNumber(
           completeNumber: number,
           phoneNumber: data['number'] ?? defaultNumber,
           countryCode: data['code'] ?? defaultCountryCode,
           states: PhoneNumberStates.PhoneNumberSelected,
         ));
       } else {
-        _streamController.sink.add(MobileNumber(
+        _streamController!.sink.add(MobileNumber(
           phoneNumber: defaultNumber,
           completeNumber: defaultNumber,
           countryCode: defaultCountryCode,
@@ -36,11 +39,12 @@ class MobileNumberPicker {
         ));
       }
     } catch (e) {
+      print(e);
       throw e;
     }
   }
 
-  //Function to extract country code and number seperately
+  ///Function to extract country code and number seperately
   Map _phoneNumberReducer(String number) {
     String addRemoved = number.replaceAll('+', '');
     Map<String, dynamic> reducedMap = Map<String, dynamic>();
@@ -61,7 +65,7 @@ class MobileNumberPicker {
     return reducedMap;
   }
 
-  //Map of length of phone number length mapped using country code
+  ///Map of length of phone number length mapped using country code
   final Map<String, dynamic> _phoneNumberList = {
     '91': 10,
     '358': 10,
@@ -230,14 +234,15 @@ class MobileNumberPicker {
 }
 
 class MobileNumber {
-  final String phoneNumber;
-  final String completeNumber;
-  final String countryCode;
-  final PhoneNumberStates states;
+  final String? phoneNumber;
+  final String? completeNumber;
+  final String? countryCode;
+  final PhoneNumberStates? states;
   MobileNumber(
       {this.phoneNumber, this.countryCode, this.states, this.completeNumber});
 }
 
+///Type of states
 enum PhoneNumberStates {
   PhoneNumberSelected,
   NoneOfTheAbove,
