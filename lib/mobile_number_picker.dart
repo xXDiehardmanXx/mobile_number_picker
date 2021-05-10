@@ -13,6 +13,7 @@ class MobileNumberPicker {
 
   Stream<MobileNumber?> get getMobileNumberStream => _streamController!.stream;
 
+  ///Dispose the stream
   void dispose() {
     _streamController?.close();
   }
