@@ -16,7 +16,7 @@ class _MyAppState extends State<MyApp> {
 
   @override
   void dispose() {
-    mobileNumber.dispose();
+    mobileNumber?.dispose();
     super.dispose();
   }
 
@@ -26,7 +26,7 @@ class _MyAppState extends State<MyApp> {
     WidgetsBinding.instance
         .addPostFrameCallback((timeStamp) => mobileNumber.mobileNumber());
     mobileNumber.getMobileNumberStream.listen((MobileNumber event) {
-      if (event.states == PhoneNumberStates.PhoneNumberSelected) {
+      if (event?.states == PhoneNumberStates.PhoneNumberSelected) {
         setState(() {
           mobileNumberObject = event;
         });
@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: Text(
-              'Country Code: ${mobileNumberObject?.countryCode} Mobile Number: ${mobileNumberObject?.phoneNumber}\n'),
+              'Mobile Number: ${mobileNumberObject?.phoneNumber}\n Country Code: ${mobileNumberObject?.countryCode}'),
         ),
       ),
     );
