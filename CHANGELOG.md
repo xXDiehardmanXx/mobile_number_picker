@@ -17,3 +17,7 @@ Phone Number Reducer Added to seperate country code and mobile number
 ## 0.0.1+4
 
 dispose() is not static function anymore , only accessible through class object.
+
+## 0.0.1+5
+
+Updated to null-safety
