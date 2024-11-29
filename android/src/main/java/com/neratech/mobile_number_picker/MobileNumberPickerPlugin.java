@@ -52,18 +52,31 @@ public class MobileNumberPickerPlugin implements FlutterPlugin, MethodCallHandle
 
 
 
-  public void getHintPhoneNumber() {
-    HintRequest hintRequest =
-            new HintRequest.Builder()
-                    .setPhoneNumberIdentifierSupported(true)
-                    .build();
-    PendingIntent mIntent = Auth.CredentialsApi.getHintPickerIntent(googleApiClient, hintRequest, PendingIntent.FLAG_IMMUTABLE);
+ public void getHintPhoneNumber() {
+    HintRequest hintRequest = new HintRequest.Builder()
+        .setPhoneNumberIdentifierSupported(true)
+        .build();
+    
+    PendingIntent mIntent = Auth.CredentialsApi.getHintPickerIntent(
+        googleApiClient, 
+        hintRequest, 
+        PendingIntent.FLAG_IMMUTABLE
+    );
+    
     try {
-      startIntentSenderForResult(activity,mIntent.getIntentSender(), RESOLVE_HINT, null, 0, 0,0,null);
-    } catch ( IntentSender.SendIntentException e) {
-      e.printStackTrace();
+        startIntentSenderForResult(
+            mIntent.getIntentSender(), 
+            RESOLVE_HINT, 
+            null, 
+            0, 
+            0, 
+            0, 
+            null
+        );
+    } catch (IntentSender.SendIntentException e) {
+        e.printStackTrace();
     }
-  }
+}
 
   @Override
   public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
