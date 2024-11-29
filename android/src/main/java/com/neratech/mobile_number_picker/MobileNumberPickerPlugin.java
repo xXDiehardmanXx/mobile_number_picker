@@ -52,7 +52,7 @@ public class MobileNumberPickerPlugin implements FlutterPlugin, MethodCallHandle
 
 
 
-  public void getHintPhoneNumber() {
+ public void getHintPhoneNumber() {
     HintRequest hintRequest =
             new HintRequest.Builder()
                     .setPhoneNumberIdentifierSupported(true)
