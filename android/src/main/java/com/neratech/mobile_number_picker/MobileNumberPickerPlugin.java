@@ -57,20 +57,22 @@ public void getHintPhoneNumber() {
             new HintRequest.Builder()
                     .setPhoneNumberIdentifierSupported(true)
                     .build();
-    PendingIntent mIntent = Auth.CredentialsApi.getHintPickerIntent(googleApiClient, hintRequest);
+
+    // Add FLAG_IMMUTABLE to the PendingIntent creation
+    PendingIntent mIntent = Auth.CredentialsApi.getHintPickerIntent(googleApiClient, hintRequest)
+            .setFlags(PendingIntent.FLAG_IMMUTABLE); // Ensure the PendingIntent has FLAG_IMMUTABLE set.
 
     try {
-        // Use FLAG_IMMUTABLE for Android 12 and above
-        PendingIntent pendingIntent = PendingIntent.getIntentSender(
-            activity,
-            mIntent.getIntentSender(),
-            RESOLVE_HINT,
-            null,
-            0,
-            0,
-            PendingIntent.FLAG_IMMUTABLE
+        startIntentSenderForResult(
+                activity,
+                mIntent.getIntentSender(),
+                RESOLVE_HINT,
+                null,
+                0,
+                0,
+                0,
+                null
         );
-        startIntentSenderForResult(activity, pendingIntent.getIntentSender(), RESOLVE_HINT, null, 0, 0, 0, null);
     } catch (IntentSender.SendIntentException e) {
         e.printStackTrace();
     }
