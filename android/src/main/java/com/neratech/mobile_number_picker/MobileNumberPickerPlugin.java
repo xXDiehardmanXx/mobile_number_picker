@@ -59,7 +59,7 @@ public class MobileNumberPickerPlugin implements FlutterPlugin, MethodCallHandle
                     .build();
     PendingIntent mIntent = Auth.CredentialsApi.getHintPickerIntent(googleApiClient, hintRequest);
     try {
-      startIntentSenderForResult(activity,mIntent.getIntentSender(), RESOLVE_HINT, null, 0, 0,0,PendingIntent.FLAG_IMMUTABLE);
+      startIntentSenderForResult(activity,mIntent.getIntentSender(), RESOLVE_HINT, null, 0, 0,0,null);
     } catch ( IntentSender.SendIntentException e) {
       e.printStackTrace();
     }
